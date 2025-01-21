@@ -1,0 +1,58 @@
+<div class="modal-overlay" *ngIf="visible">
+  <div class="modal">
+    <!-- Cabecera del modal -->
+    <header class="modal-header">
+      <h3 *ngIf="!solicitud?.solicitudId">Agregar Solicitud</h3>
+      <h3 *ngIf="solicitud?.solicitudId">Detalle de la Solicitud</h3>
+      <button class="close-button" (click)="close.emit()">×</button>
+    </header>
+
+    <!-- Cuerpo del modal -->
+    <div class="modal-body">
+      
+
+      <!-- Vista de detalles -->
+      <div *ngIf="solicitud?.solicitudId">
+        <div class="detalle-info">
+          <p><strong>Proveedor:</strong> {{ solicitud.proveedor }}</p>
+          <p><strong>Fecha:</strong> {{ solicitud.fecha | date }}</p>
+          <p>
+            <strong>Estado: </strong>
+            <span class="estado-label" [ngClass]="estadoClass(solicitud.estado)">
+              {{ solicitud.estado }}
+            </span>
+          </p>
+        </div>
+        <h4>Detalle</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detalle of solicitud.detalles">
+              <td>{{ detalle.producto }}</td>
+              <td>{{ detalle.cantidad }}</td>
+              <td>{{ detalle.precioUnitario | currency }}</td>
+              <td>{{ detalle.subtotal | currency }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="monto-total-container">
+          <h2 class="monto-total">Monto Total: {{ getMontoTotal() | currency }}</h2>
+        </div>
+        <div *ngIf="esAprobador" class="estado-actualizacion">
+          <label for="estado">Actualizar Estado:</label>
+          <select id="estado" [(ngModel)]="estadoSeleccionado">
+            <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+          </select>
+          <button class="btn-update" (click)="actualizarEstado()">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

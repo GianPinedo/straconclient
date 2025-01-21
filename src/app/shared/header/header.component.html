@@ -1,0 +1,11 @@
+<header class="header">
+  <span>Bienvenido, <strong>{{ usuario?.nombreUsuario }}</strong> </span>
+  <span class="user-role">Rol: <strong>{{ usuario?.rol }}</strong></span>
+  <div class="header-actions">
+    <div class="logout-container" (click)="logout()">
+      <span class="material-icons logout-icon">logout</span>
+      <span class="logout-text">Cerrar Sesión</span>
+    </div>
+    <i class="icon-settings"></i>
+  </div>
+</header>

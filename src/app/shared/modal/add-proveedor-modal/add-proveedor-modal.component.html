@@ -1,0 +1,49 @@
+<div class="modal-overlay">
+  <div class="modal">
+    <header class="modal-header">
+      <h2>{{ proveedor ? 'Editar Proveedor' : 'Agregar Proveedor' }}</h2>
+      <button class="close-button" (click)="cerrarModal()">×</button>
+    </header>
+    <div class="modal-body">
+      <!-- Mensaje de error -->
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+      <!-- Formulario -->
+      <form (ngSubmit)="guardarProveedor()">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            id="nombre"
+            type="text"
+            [(ngModel)]="proveedorForm.nombre"
+            name="nombre"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="direccion">Dirección</label>
+          <input
+            id="direccion"
+            type="text"
+            [(ngModel)]="proveedorForm.direccion"
+            name="direccion"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="contacto">Contacto</label>
+          <input
+            id="contacto"
+            type="email"
+            [(ngModel)]="proveedorForm.contacto"
+            name="contacto"
+            required
+          />
+        </div>
+        <button type="submit" class="btn-submit">
+          {{ proveedor ? 'Guardar Cambios' : 'Agregar' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

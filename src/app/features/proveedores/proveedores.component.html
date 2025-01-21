@@ -1,0 +1,69 @@
+<div class="admin-layout">
+    <app-nav></app-nav>
+    <main class="main-content">
+      <app-header></app-header>
+      <section class="content">
+        <!-- Mensaje de error -->
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+  
+        <!-- Encabezado con Título -->
+        <div class="table-header">
+          <h2>Proveedores</h2>
+          <button class="btn-add" (click)="abrirModal()">Agregar</button>
+        </div>
+  
+        <!-- Tabla de proveedores -->
+        <table *ngIf="!errorMessage && proveedores.length > 0" class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Contacto</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let proveedor of proveedores; let i = index">
+              <td>{{ proveedor.id }}</td>
+              <td>{{ proveedor.nombre }}</td>
+              <td>{{ proveedor.direccion }}</td>
+              <td>{{ proveedor.contacto }}</td>
+              <td class="action-icons">
+                <!-- Botón Editar -->
+                <span
+                  class="material-icons action-icon edit"
+                  (click)="abrirModal(proveedor)"
+                >
+                  edit
+                </span>
+                <!-- Botón Eliminar -->
+                <span
+                  class="material-icons action-icon delete"
+                  (click)="eliminarProveedor(proveedor.id)"
+                >
+                  delete
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Modal -->
+        <app-add-proveedor-modal
+        *ngIf="modalVisible"
+        [proveedor]="proveedorSeleccionado"
+        (close)="cerrarModal()"
+        (proveedorActualizado)="actualizarTabla()"
+        ></app-add-proveedor-modal>
+  
+        <!-- Mensaje cuando no hay proveedores -->
+        <div *ngIf="proveedores.length === 0 && !errorMessage" class="no-data">
+          No hay proveedores disponibles.
+        </div>
+      </section>
+    </main>
+  </div>
+  

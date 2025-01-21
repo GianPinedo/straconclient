@@ -1,0 +1,78 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    /*centrar el modal*/
+    position: relative;
+    display: block;
+    background-color: white;
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px;
+    max-width: 600px; /* Limita el ancho máximo */
+    max-height: 70%; /* Limita la altura máxima */
+    width: 90%; /* Ancho relativo al viewport */
+    overflow-y: auto; /* Scroll vertical si el contenido excede la altura */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacarlo */
+    animation: fadeIn 0.3s ease-in-out; /* Animación suave de entrada */
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .btn-submit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  

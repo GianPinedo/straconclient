@@ -1,0 +1,104 @@
+<div class="admin-layout">
+  <app-nav></app-nav>
+  <main class="main-content">
+    <app-header></app-header>
+    <section class="content">
+      <!-- Mensaje de error -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Encabezado con Título y Botón -->
+      <div class="table-header">
+        <h2>Solicitudes de Compra</h2>
+        <button *ngIf="esColocador" class="btn-add" (click)="abrirModalAgregar()">Agregar Solicitud</button>
+      </div>
+
+      <!-- Filtro por estado -->
+      <div class="filtro-estado">
+        <label for="estado">Filtrar por estado:</label>
+        <select id="estado" (change)="onEstadoChange($event.target.value)">
+          <option value="">Todos</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="Aprobado">Aprobado</option>
+          <option value="Rechazado">Rechazado</option>
+        </select>
+      </div>
+
+      <!-- Tabla de solicitudes -->
+      <table *ngIf="!errorMessage && solicitudesFiltradas.length > 0" class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Proveedor</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let solicitud of solicitudesFiltradas; let i = index">
+            <td>{{ solicitud.solicitudId}}</td>
+            <td>{{ solicitud.proveedor }}</td>
+            <td>{{ solicitud.usuario }}</td>
+            <td>{{ solicitud.fecha | date: 'yyyy-MM-dd' }}</td>
+            <td>
+              <span
+                class="badge"
+                [ngClass]="{
+                  approved: solicitud.estado === 'Aprobado',
+                  pending: solicitud.estado === 'Pendiente',
+                  rejected: solicitud.estado === 'Rechazado'
+                }"
+              >
+                {{ solicitud.estado }}
+              </span>
+            </td>
+            <td class="action-icons">
+              <!-- Icono Ver -->
+              <span
+                class="material-icons action-icon view"
+                (click)="verSolicitud(solicitud.solicitudId)"
+              >
+                visibility
+              </span>
+              <!-- Icono Eliminar -->
+              <span
+                class="material-icons action-icon delete"
+                (click)="eliminarSolicitud(solicitud.solicitudId)"
+              >
+                delete
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="solicitudesFiltradas.length === 0 && !errorMessage" class="no-data">
+        No se encuentran solicitudes con estado 
+        <span *ngIf="estadoSeleccionado; else todos">"{{ estadoSeleccionado }}"</span>
+        <ng-template #todos>Todos</ng-template>.
+      </div>
+
+      <!-- Modal para agregar solicitud -->
+      <app-add-solicitud-modal
+      *ngIf="modalAgregarVisible"
+      (close)="cerrarModalAgregar()"
+      (solicitudCreada)="obtenerSolicitudes()"
+      ></app-add-solicitud-modal>
+
+      <!-- Modal -->
+      <app-modal
+      [solicitud]="solicitudSeleccionada"
+      [visible]="modalVisible"
+      (close)="cerrarModal()"
+      (estadoActualizado)="recargarSolicitudes()"
+      ></app-modal>
+
+      <!-- Mensaje cuando no hay solicitudes -->
+      <div *ngIf="solicitudes.length === 0 && !errorMessage" class="no-data">
+        No hay solicitudes disponibles.
+      </div>
+    </section>
+  </main>
+</div>

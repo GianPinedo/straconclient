@@ -1,0 +1,79 @@
+<div class="modal-overlay">
+    <div class="modal large-modal">
+      <header class="modal-header">
+        <h2>Agregar Solicitud</h2>
+        <button class="close-button" (click)="cerrarModal()">×</button>
+      </header>
+      <div class="modal-body">
+        <!-- Mensaje de error -->
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  
+        <!-- Formulario de cabecera -->
+        <form>
+          <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input
+              id="fecha"
+              type="date"
+              [(ngModel)]="solicitud.fecha"
+              name="fecha"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="proveedor">Proveedor</label>
+            <select id="proveedor" [(ngModel)]="solicitud.proveedorId" name="proveedor" required>
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
+                {{ proveedor.nombre }}
+              </option>
+            </select>
+          </div>
+        </form>
+  
+        <!-- Lista de productos -->
+        <div class="productos-list">
+          <h3>Productos</h3>
+          <div *ngFor="let producto of productos" class="producto-item">
+            <span>{{ producto.nombre }}</span>
+            <button (click)="agregarProductoAlDetalle(producto)">Agregar</button>
+          </div>
+        </div>
+  
+        <!-- Tabla de detalles -->
+        <div class="detalles-list">
+          <h3>Detalle de la Solicitud</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detalle of detalles">
+                <td>{{ detalle.nombre }}</td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="detalle.cantidad"
+                    (input)="actualizarSubtotal(detalle)"
+                  />
+                </td>
+                <td>{{ detalle.precioUnitario | currency }}</td>
+                <td>{{ detalle.subtotal | currency }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="total-orden">
+          <h3>Total: {{ totalOrden | currency }}</h3>
+        </div>
+        
+  
+        <button class="btn-submit" (click)="guardarSolicitud()">Guardar</button>
+      </div>
+    </div>
+  </div>
+  

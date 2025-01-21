@@ -1,0 +1,64 @@
+/* Barra de Navegación Lateral */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+  
+  .sidebar-header {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+  }
+  
+  .nav-item {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .nav-item i {
+    margin-right: 10px;
+  }
+  
+  .nav-item.active {
+    background-color: #34495e;
+    font-weight: bold;
+  }
+  
+  .nav-item:hover {
+    background-color: #34495e;
+  }
+  
+  /* Estilo para el pie de la barra lateral */
+  .sidebar-footer {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 12px;
+  }
+  
+  .logo {
+    text-align: center;
+    /* reducir el tamaño del logo */
+    width: 180px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
