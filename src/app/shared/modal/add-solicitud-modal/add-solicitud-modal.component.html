@@ -1,48 +1,65 @@
 <div class="modal-overlay">
-    <div class="modal large-modal">
-      <header class="modal-header">
-        <h2>Agregar Solicitud</h2>
-        <button class="close-button" (click)="cerrarModal()">×</button>
-      </header>
-      <div class="modal-body">
-        <!-- Mensaje de error -->
-        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-  
-        <!-- Formulario de cabecera -->
-        <form>
-          <div class="form-group">
-            <label for="fecha">Fecha</label>
-            <input
-              id="fecha"
-              type="date"
-              [(ngModel)]="solicitud.fecha"
-              name="fecha"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="proveedor">Proveedor</label>
-            <select id="proveedor" [(ngModel)]="solicitud.proveedorId" name="proveedor" required>
-              <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
-                {{ proveedor.nombre }}
-              </option>
-            </select>
-          </div>
-        </form>
-  
+  <div class="modal large-modal">
+    <header class="modal-header">
+      <h2>Agregar Solicitud</h2>
+      <button class="close-button" (click)="cerrarModal()">×</button>
+    </header>
+    <div class="modal-body">
+      <!-- Mensaje de error -->
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+      <!-- Formulario de cabecera -->
+      <form class="form-header">
+        <div class="form-group">
+          <label for="fecha">Fecha</label>
+          <input
+            id="fecha"
+            type="date"
+            [(ngModel)]="solicitud.fecha"
+            name="fecha"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="proveedor">Proveedor</label>
+          <select id="proveedor" [(ngModel)]="solicitud.proveedorId" name="proveedor" required>
+            <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
+              {{ proveedor.nombre }}
+            </option>
+          </select>
+        </div>
+      </form>
+
+      <div class="productos-detalles-container">
         <!-- Lista de productos -->
         <div class="productos-list">
-          <h3>Productos</h3>
-          <div *ngFor="let producto of productos" class="producto-item">
-            <span>{{ producto.nombre }}</span>
-            <button (click)="agregarProductoAlDetalle(producto)">Agregar</button>
-          </div>
+          <h3>Productos Disponibles</h3>
+          <table class="table productos-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Precio Unitario</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let producto of productos">
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.precioUnitario | currency }}</td>
+                <td>
+                  <button class="btn-add" (click)="agregarProductoAlDetalle(producto)">
+                    <span class="material-icons">add</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-  
+      
         <!-- Tabla de detalles -->
         <div class="detalles-list">
           <h3>Detalle de la Solicitud</h3>
-          <table class="table">
+          <table class="table detalles-table">
             <thead>
               <tr>
                 <th>Producto</th>
@@ -67,13 +84,16 @@
             </tbody>
           </table>
         </div>
-        <div class="total-orden">
-          <h3>Total: {{ totalOrden | currency }}</h3>
-        </div>
-        
-  
-        <button class="btn-submit" (click)="guardarSolicitud()">Guardar</button>
       </div>
+      
+      
+
+      <!-- Total -->
+      <div class="total-orden">
+        <h3>Total: {{ totalOrden | currency }}</h3>
+      </div>
+
+      <button class="btn-submit" (click)="guardarSolicitud()">Guardar</button>
     </div>
   </div>
-  
+</div>
