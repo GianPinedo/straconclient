@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SolicitudesCompraService } from '../../core/solicitudes-compra.service';
 import { CommonModule } from '@angular/common';
-import { NavComponent } from '../../shared/nav/nav.component'; // Ajusta la ruta si es diferente
-import { HeaderComponent } from '../../shared/header/header.component'; // Ajusta la ruta si es diferente
+import { NavComponent } from '../../shared/nav/nav.component';
+import { HeaderComponent } from '../../shared/header/header.component';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { Detalle } from '../../core/detalle.model';
 import { Solicitud } from '../../core/solicitud.model';
-import { AddSolicitudModalComponent } from '../../shared/modal/add-solicitud-modal/add-solicitud-modal.component'; // Ajusta la ruta si es diferente
+import { AddSolicitudModalComponent } from '../../shared/modal/add-solicitud-modal/add-solicitud-modal.component';
 import { AuthService } from '../../core/auth.service';
 
 @Component({
@@ -43,7 +43,7 @@ export class SolicitudesComponent implements OnInit {
     console.log('Iniciando obtención de solicitudes...');
     this.solicitudesService.obtenerSolicitudes().subscribe({
       next: (response) => {
-        console.log('Respuesta recibida:', response); // Verifica el formato de la respuesta
+        console.log('Respuesta recibida:', response); 
         if (response.success) {
           this.solicitudes = response.data;
           this.filtrarSolicitudes(); 
@@ -177,8 +177,7 @@ export class SolicitudesComponent implements OnInit {
     this.filtrarSolicitudes();
   }
   recargarSolicitudes(): void {
-    this.obtenerSolicitudes(); // Llama a tu método existente para obtener las solicitudes
+    this.obtenerSolicitudes(); 
   }
-  
   
 }

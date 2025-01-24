@@ -10,23 +10,25 @@
 
       <!-- Formulario de cabecera -->
       <form class="form-header">
-        <div class="form-group">
-          <label for="fecha">Fecha</label>
-          <input
-            id="fecha"
-            type="date"
-            [(ngModel)]="solicitud.fecha"
-            name="fecha"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="proveedor">Proveedor</label>
-          <select id="proveedor" [(ngModel)]="solicitud.proveedorId" name="proveedor" required>
-            <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
-              {{ proveedor.nombre }}
-            </option>
-          </select>
+        <div class="d-flex w-100">
+          <div class="form-group me-3 w-100">
+            <label for="fecha">Fecha</label>
+            <input
+              id="fecha"
+              type="date"
+              [(ngModel)]="solicitud.fecha"
+              name="fecha"
+              required
+            />
+          </div>
+          <div class="form-group w-100">
+            <label for="proveedor">Proveedor</label>
+            <select id="proveedor" [(ngModel)]="solicitud.proveedorId" name="proveedor" required>
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
+                {{ proveedor.nombre }}
+              </option>
+            </select>
+          </div>
         </div>
       </form>
 

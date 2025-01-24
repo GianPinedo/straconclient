@@ -17,7 +17,11 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logout();
-    window.location.href = '/login'; // Redirigir al login
+    // implementar confirmación de logout
+    if (confirm('¿Estás seguro de cerrar sesión?')) {
+      this.authService.logout();
+      window.location.href = '/login'; // Redirigir al login
+    }
+    
   }
 }
